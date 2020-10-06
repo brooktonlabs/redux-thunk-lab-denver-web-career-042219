@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchCats } from './actions/catActions'
 
 class App extends Component {
 
-  render()
+  componentDidMount() {
+    console.log(this.props)
+    this.props.fetchCats()
+  }
+
+  render() {
     console.log(this.props.catPics)
     return (
       <div className="App">
@@ -21,4 +27,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCats: () => dispatch(fetchCats())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
